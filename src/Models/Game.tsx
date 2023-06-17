@@ -1,4 +1,4 @@
-class Game {
+export class Game {
     constructor(id: number, name: string, description: string, price: number, sale: number, publisher: string, developer: string, releaseDate: string, genres: string[]) {
         this.id = id;
         this.name = name;

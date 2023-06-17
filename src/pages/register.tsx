@@ -6,7 +6,7 @@ export default function Register() {
         <div>
             <NavBar/>
             <div className='flex flex-col items-center'>
-                <h2 className='text-4xl font-bold'>Register</h2>
+                <h1 className='text-4xl font-bold'>Register</h1>
                 <RegisterForm/>
             </div>
         </div>

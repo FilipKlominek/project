@@ -6,7 +6,7 @@ export default function Login() {
         <div>
             <NavBar/>
             <div className='flex flex-col items-center'>
-                <h2 className='text-4xl font-bold'>Login</h2>
+                <h1 className='text-4xl font-bold'>Login</h1>
                 <LoginForm/>
             </div>
         </div>

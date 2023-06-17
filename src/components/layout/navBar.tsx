@@ -6,7 +6,7 @@ export function NavBar() {
 
     const [email, setEmail] = useState('');
 
-    useEffect(() => {
+     useEffect(() => {
 
         if (localStorage.getItem('email') !== null) {
             // @ts-ignore

@@ -43,7 +43,7 @@ export function LoginForm() {
         <form onSubmit={handleSubmit}>
             <div>
                 <label>
-                    <input className='m-2 p-2 bg-black border border-white' type="email" placeholder='email'
+                    <input className='m-2 p-2 bg-black border border-white' placeholder='email'
                            value={email} onChange={handleEmail}/>
                 </label>
             </div>
