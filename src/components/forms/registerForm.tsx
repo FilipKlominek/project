@@ -1,5 +1,4 @@
 import {ChangeEvent, SyntheticEvent, useState} from 'react';
-import {Simulate} from "react-dom/test-utils";
 
 export function RegisterForm() {
 
@@ -19,9 +18,9 @@ export function RegisterForm() {
         setPassword(event.target.value);
     };
 
-    const handleSubmit = (e:SyntheticEvent) => {
+    const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault()
-        const response= fetch('http://localhost:3000/auth/register', {
+        const response = await fetch('http://localhost:3000/auth/register', {
             method: 'POST',
             body: JSON.stringify({
                 'email': email,
@@ -31,25 +30,30 @@ export function RegisterForm() {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             }
+        }).then(async response => await response.json());
 
-        });
+            console.log('success')
+
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <div>
                 <label>
-                    <input className='m-2 p-2 bg-black border border-white' placeholder='username' type='text' value={name} onChange={handleName}/>
+                    <input className='m-2 p-2 bg-black border border-white' placeholder='username' type='text'
+                           value={name} onChange={handleName}/>
                 </label>
             </div>
             <div>
                 <label>
-                    <input className='m-2 p-2 bg-black border border-white' placeholder='email' type='email' value={email} onChange={handleEmail}/>
+                    <input className='m-2 p-2 bg-black border border-white' placeholder='email' required={true} type='email'
+                           value={email} onChange={handleEmail}/>
                 </label>
             </div>
             <div>
                 <label>
-                    <input className='m-2 p-2 bg-black border border-white' placeholder='password' type='password' value={password} onChange={handlePassword}/>
+                    <input className='m-2 p-2 bg-black border border-white' placeholder='password' minLength={8} required={true} type='password'
+                           value={password} onChange={handlePassword}/>
                 </label>
             </div>
             <div className='text-center'>

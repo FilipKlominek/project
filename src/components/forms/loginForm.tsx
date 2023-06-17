@@ -25,9 +25,18 @@ export function LoginForm() {
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             }
-        }).then(async response => await response.json())
-        localStorage.setItem('email', email);
-        localStorage.setItem('sessionToken', response.Authorization);
+        }).then(async response => await response.json());
+
+        if (response.data != null) {
+            localStorage.setItem('email', response.data.email);
+            localStorage.setItem('sessionToken', response.Authorization);
+
+            location.reload();
+
+            return;
+        }
+
+        alert('Incorrect email or password')
     };
 
     return (

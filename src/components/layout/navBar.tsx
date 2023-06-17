@@ -7,18 +7,24 @@ export function NavBar() {
     const [email, setEmail] = useState('');
 
     useEffect(() => {
-        setEmail(localStorage.getItem('email'));
-        console.log(email);
+
+        if (localStorage.getItem('email') !== null) {
+            // @ts-ignore
+            setEmail(localStorage.getItem('email'));
+        }
+
     }, [email]);
 
-    const clearEmail = () => {
+    const logout = () => {
         localStorage.removeItem('email');
+        localStorage.removeItem('Authorization');
+        location.reload();
     }
 
-    function Logout() {
+    function LogoutButton() {
         if (email != '') {
-            return <button onClick={clearEmail} className='p-4 hover:bg-gray-800'>Logout</button>;
-        }
+            return <button onClick={logout} className='p-4 hover:bg-gray-800' type='submit'>Logout</button>;
+        } return <></>
     }
 
     return (
@@ -30,7 +36,7 @@ export function NavBar() {
             </div>
             <div className='flex items-center'>
                 {email}
-                <Logout/>
+                <LogoutButton/>
             </div>
         </div>
     )
