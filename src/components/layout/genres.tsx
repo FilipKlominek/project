@@ -1,4 +1,5 @@
 import {Genre} from "@/Models/Genre";
+import {useEffect} from "react";
 
 const handleDelete = async (id: number) => {
     const response = await fetch('http://localhost:3000/genres/' + id, {
@@ -8,13 +9,17 @@ const handleDelete = async (id: number) => {
             'Content-type': 'application/json; charset=UTF-8'
         }
     });
-    console.log('deleted something');
 }
 
 const placeholder: Genre[] = [new Genre(0, 'genre0'), new Genre(1, 'genre1')]; //TODO: remove
 
 
+let data: Genre[] = [];
+
 const getGenres = async () => {
+
+    data = [];
+
 
     const response = await fetch('http://localhost:3000/genres', {
         method: 'GET',
@@ -24,23 +29,18 @@ const getGenres = async () => {
         }
     }).then(async response => await response.json());
 
-    const genres: Genre[] = [];
-
     for (const i of response) {
-        genres.push(new Genre(i.id, i.name));
+        data.push(new Genre(i.id, i.name));
     }
 
-    console.log(genres)
-
-    return genres;
 }
 
 
 export function GenreList() {
 
-    getGenres();
+    getGenres()
 
-    //TODO: getGenres() instead of placeholder
+    //TODO: data instead of placeholder
     const genreList = placeholder.map(genre =>
         <li key={genre.id} className='border-b flex justify-between'>
             <button className='pb-3 pt-3 pl-1 pr-1 hover:bg-gray-800' onClick={() => handleDelete(genre.id)}>×
